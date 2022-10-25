@@ -151,7 +151,15 @@ git push "$GIT_CMD_REPOSITORY" --set-upstream "$TARGET_BRANCH"
 
 if [ ! -z "$TARGET_TAG" ]
 then
+	echo "[+] Pushing tag"
+	git fetch --all --tags
+	# if the tag already exists, deletes it.
+	if [ ! -z "$(git tag | grep $TARGET_TAG)"];
+	then
+		git tag -d"$TARGET_TAG"
+		git push origin ":refs/tags/$TARGET_TAG"
+	fi
+	# create a new tag and push to origin
 	git tag "$TARGET_TAG"
-	git push "$GIT_CMD_REPOSITORY" --delete "$TARGET_TAG" &> /dev/null || true
-	git push "$GIT_CMD_REPOSITORY" --tags --set-upstream "$TARGET_TAG"
+	git push origin "$TARGET_TAG"
 fi
