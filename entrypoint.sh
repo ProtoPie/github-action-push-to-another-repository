@@ -154,7 +154,7 @@ then
 	echo "[+] Pushing tag"
 	git fetch --all --tags
 	# if the tag already exists, deletes it.
-	if [ ! -z "$(git tag | grep $TARGET_TAG)"];
+	if [ ! -z "$(git tag | grep $TARGET_TAG)" ];
 	then
 		git tag -d "$TARGET_TAG"
 		git push origin -d "$TARGET_TAG"
