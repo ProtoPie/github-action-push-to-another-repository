@@ -156,8 +156,8 @@ then
 	# if the tag already exists, deletes it.
 	if [ ! -z "$(git tag | grep $TARGET_TAG)"];
 	then
-		git tag -d"$TARGET_TAG"
-		git push origin ":refs/tags/$TARGET_TAG"
+		git tag -d "$TARGET_TAG"
+		git push origin -d "$TARGET_TAG"
 	fi
 	# create a new tag and push to origin
 	git tag "$TARGET_TAG"
